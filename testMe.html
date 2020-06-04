@@ -13,8 +13,7 @@
             и выведи название поры года на экран</p>
         <p id="one"></p>
         <hr />
-        <p>
-            дан массив с числами найди его сумму
+        <p> дан массив с числами найди его сумму
         </p>
         <p id="two"></p>
         <hr />
@@ -43,12 +42,14 @@
         <input placeholder="введите текст" id="ask8" type="text">
         <button id="task8">=</button>
         <hr />
-        <p>дана кнопка по нажатию на нее выведи алертом '!!!'</p><button id="ask9">нажми меня</button>
+        <p>дана кнопка по нажатию на нее выведи алертом '!!!'</p>
+        <button id="ask9">нажми меня</button>
         </p>
         <hr />
         <p>дан див 100 на 100 px сделай так, чтобы по клику на любое место окна браузера
             этот див пермещался в место клика</p>
-        <div></div>
+        <button id="ten">кликните меня чтоб заработал</button>
+        <div style="width:100px;height: 100px; border:4px solid gray"></div>
 
 
         <script src="https://code.jquery.com/jquery-2.1.0.js">
@@ -80,10 +81,7 @@
             }
             document.getElementById("two").innerHTML = "массив[" + arr + "] сумма: " + count;
 
-            //let pyramid= new Array();
             for (let i = 1; i < 6; i++) {
-                //var 
-                //console.log(i);
                 for (let j = 1; j < 6; j++) {
                     if (j <= i) {
                         console.log(i);
@@ -126,7 +124,6 @@
             };
             var intervalId = setInterval(moveTime, 1000);
 
-
             var d = new Date();
             function formatDate(d) {
                 var dd = d.getDate();
@@ -152,6 +149,20 @@
                 alert("!!!");
             }
             document.getElementById("ask9").addEventListener("click", show);
+
+            function cl() {
+                let c = document.getElementById('ten').value;
+                mouseClick();
+            }
+            function mouseClick() {
+                return $("html").mousemove(function (event) {
+                    $("div").offset({
+                        left: event.pageX,
+                        top: event.pageY
+                    });
+                });
+            }
+            document.getElementById('ten').addEventListener("click", cl);
         </script>
 </body>
 
