@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>для проверки все данные вводятся рандомно и обнавляются при перезагрузке</h1>
+        <p>дана переменная в ней лежит число от 1 до 12 номер месяца определи, в какую пору года попадает этот месяц
+            и выведи название поры года на экран</p>
+        <p id="one"></p>
+        <hr />
+        <p>
+            дан массив с числами найди его сумму
+        </p>
+        <p id="two"></p>
+        <hr />
+        <p>выведи пирамидку циклами</p>
+        <p id="three"></p>
+        <hr />
+        <p>даны два инпута, кнопка и абзац. В инпуты вводятся числа. По нажатию на кнопку запишите сумму чисел в абзац.
+        </p>
+        <input placeholder="введите первое число" id="ask1" type="text">
+        <input placeholder="введите второе число" id="ask2" type="text">
+        <button id="task">=</button>
+        <p id="four"></p>
+        <hr />
+        <p>дан массив с числами проверь, есть ли в нем число 3 если есть - выведи есть
+            если нет - то нет</p>
+        <p id="five"></p>
+        <hr />
+        <p>дан абзац, в нем записано число, например, 10 сделайте так, чтобы в абзаце начался обратный отсчет,
+            каждую секунду число будет делать -1 пока не дойдет до нуля</p>
+        <p id="six"></p>
+        <hr />
+        <p>выведи на экран текущий день в формате год-месяц-день</p>
+        <p id="seven"></p>
+        <hr />
+        <p>дан инпут и кнопка по нажатию на кнопку выведи алертом текст из инпута</p>
+        <input placeholder="введите текст" id="ask8" type="text">
+        <button id="task8">=</button>
+        <hr />
+        <p>дана кнопка по нажатию на нее выведи алертом '!!!'</p><button id="ask9">нажми меня</button>
+        </p>
+        <hr />
+        <p>дан див 100 на 100 px сделай так, чтобы по клику на любое место окна браузера
+            этот див пермещался в место клика</p>
+        <div></div>
+
+
+        <script src="https://code.jquery.com/jquery-2.1.0.js">
+        </script>
+        <script>
+            let month = Math.floor(Math.random() * 12) + 1;
+            let ansMonth;
+            switch (month) {
+                case 1: case 2: case 12:
+                    ansMonth = "зима";
+                    break;
+                case 3: case 4: case 5:
+                    ansMonth = "весна";
+                    break;
+                case 6: case 7: case 8:
+                    ansMonth = "лето";
+                    break;
+                case 9: case 10: case 11:
+                    ansMonth = "осень";
+                    break;
+            }
+            document.getElementById('one').innerHTML = "число " + month + ": " + ansMonth;
+
+            let arr = [];
+            let count = 0;
+            for (let i = 0; i < 5; i++) {
+                arr[i] = Math.floor(Math.random() * 10);
+                count += arr[i];
+            }
+            document.getElementById("two").innerHTML = "массив[" + arr + "] сумма: " + count;
+
+            //let pyramid= new Array();
+            for (let i = 1; i < 6; i++) {
+                //var 
+                //console.log(i);
+                for (let j = 1; j < 6; j++) {
+                    if (j <= i) {
+                        console.log(i);
+                    }
+                }
+            }
+            document.getElementById("three").innerHTML = "смотреть в консоли...";
+
+            function findSum() {
+                let u1 = +document.getElementById('ask1').value;
+                let u2 = +document.getElementById('ask2').value;
+
+                let show = "cумма чисел (" + u1 + ", " + u2 + "): " + (u1 + u2);
+                document.getElementById('four').innerHTML = show;
+            }
+            document.getElementById('task').addEventListener('click', findSum);
+
+            for (let i = 0; i < 6; i++) {
+                arr[i] = Math.floor(Math.random() * 10);
+            }
+            let thr;
+            for (let value of arr) {
+                if (value == 3) {
+                    thr = " есть тройка ";
+                    break;
+                } else {
+                    thr = " нет тройки ";
+                }
+            }
+            document.getElementById("five").innerHTML = "массив[" + arr + "] : " + thr;
+
+            let tim = 10;
+            var moveTime = function () {
+                tim--;
+                if (tim == 0) {
+                    tim = 0;
+                    clearInterval(intervalId);
+                }
+                document.getElementById('six').innerHTML = tim + " если видите 0, обновите страницу";
+            };
+            var intervalId = setInterval(moveTime, 1000);
+
+
+            var d = new Date();
+            function formatDate(d) {
+                var dd = d.getDate();
+                if (dd < 10) dd = '0' + dd;
+                var mm = d.getMonth() + 1;
+                if (mm < 10) mm = '0' + mm;
+                var yy = d.getFullYear();
+                if (yy < 10) yy = '0' + yy;
+                return yy + '-' + mm + '-' + dd;
+            }
+            let task7 = formatDate(d);
+            document.getElementById("seven").innerHTML = task7;
+
+            function findTe() {
+                let u1 = document.getElementById('ask8').value;
+                //document.getElementById('eight').innerHTML = u1;
+                alert(u1);
+            }
+            document.getElementById('task8').addEventListener('click', findTe);
+
+            function show() {
+                let u = document.getElementById('ask9').value;
+                alert("!!!");
+            }
+            document.getElementById("ask9").addEventListener("click", show);
+        </script>
+</body>
+
+</html>
