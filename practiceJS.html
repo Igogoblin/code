@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Analizator text</title>
+</head>
+
+<body>
+    <h3>Задача №1-4</h3>
+    <p>Дан textarea. Пусть в него вводится текст.
+        Сделайте так, чтобы по потери фокуса под текстареа вывелось сообщение о том,
+        сколько в этом тексте слов.</p>
+    <textarea name="" id="iAm" cols="30" rows="10"></textarea>
+    <p id="ans"></p>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js">
+    </script>
+    <script>
+
+        var n = 0;
+        $('textarea')
+            //console.log("promezh");
+            .mouseout(function () {
+                //$('iAm').
+                console.log(" mause leave" + n);
+            })
+            .mouseover(function () {
+                //$('iAm').
+                console.log("nu nakonec");
+            });
+        // console.log($('#iAm').text(++n));
+        console.log("fi");
+
+        var info;
+        $('textarea').mousemove(function (e) {
+            if (info !== e.target) {
+                console.log(e.target);
+                info = e.target;
+            }
+        });
+
+
+
+        console.log();
+
+        function fucus() {
+            infText = document.getElementById("iAm").value;
+            let a = "Введенном тексте " + ar(infText) + " слов";
+
+            document.getElementById('ans').innerHTML = a;
+        }
+
+
+        document.getElementById("ans").addEventListener("click", fucus);
+
+        function ar(a) {
+            let str = a.split(' ');
+            return str.length;
+        }
+
+        /*
+        let foc = document.querySelector('#iAm');
+        foc.addEventListener('click', function () {
+            if (textarea.fucus == true) {
+                console.log("true");
+            }
+            console.log("false");
+        });
+        //console.log(foc);
+        */
+    </script>
+</body>
+
+</html>
