@@ -20,57 +20,26 @@
     </script>
     <script>
 
-        var n = 0;
-        $('textarea')
-            //console.log("promezh");
-            .mouseout(function () {
-                //$('iAm').
-                console.log(" mause leave" + n);
-            })
-            .mouseover(function () {
-                //$('iAm').
-                console.log("nu nakonec");
-            });
-        // console.log($('#iAm').text(++n));
-        console.log("fi");
 
-        var info;
-        $('textarea').mousemove(function (e) {
-            if (info !== e.target) {
-                console.log(e.target);
-                info = e.target;
-            }
-        });
-
-
-
-        console.log();
 
         function fucus() {
             infText = document.getElementById("iAm").value;
             let a = "Введенном тексте " + ar(infText) + " слов";
-
             document.getElementById('ans').innerHTML = a;
         }
-
-
-        document.getElementById("ans").addEventListener("click", fucus);
 
         function ar(a) {
             let str = a.split(' ');
             return str.length;
         }
 
-        /*
-        let foc = document.querySelector('#iAm');
-        foc.addEventListener('click', function () {
-            if (textarea.fucus == true) {
-                console.log("true");
+        iAm.onblur = function () {
+            if (iAm.blur) {
+                fucus();
             }
-            console.log("false");
-        });
-        //console.log(foc);
-        */
+        }
+
+
     </script>
 </body>
 
