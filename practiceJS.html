@@ -9,36 +9,91 @@
 </head>
 
 <body>
-    <h3>Задача №1-4</h3>
-    <p>Дан textarea. Пусть в него вводится текст.
-        Сделайте так, чтобы по потери фокуса под текстареа вывелось сообщение о том,
-        сколько в этом тексте слов.</p>
+    <h3>Задача №1-5 Анализатор текста</h3>
+    Дан textarea. Пусть в него вводится текст:
+    <ol>
+
+        <label>
+            <li><input type="checkbox" id="one" checked>Сделайте так, чтобы по потери фокуса под текстареа вывелось
+                сообщение о том,
+                сколько в этом тексте слов.</li>
+        </label>
+        <li><input type="checkbox" id="two" checked>Модифицируйте предыдущую задачу так, чтобы также вывелось сообщение
+            о том, сколько в тексте символов.</li>
+        <li><input type="checkbox" id="three" checked>Модифицируйте предыдущую задачу так, чтобы также вывелось
+            сообщение о том, сколько в тексте символов за вычетом пробелов.</li>
+        <li><input type="checkbox" id="four" checked>Модифицируйте предыдущую задачу так, чтобы также вывелось сообщение
+            о процентном содержании каждого символа в тексте.</li>
+        <li>релизовать чекбоксы</li>
+    </ol>
     <textarea name="" id="iAm" cols="30" rows="10"></textarea>
-    <p id="ans"></p>
+    <p id="ans1"></p>
+    <p id="ans2"></p>
+    <p id="ans3"></p>
+    <p id="ans4"></p>
 
     <script src="https://code.jquery.com/jquery-2.1.0.js">
     </script>
     <script>
 
-
-
         function fucus() {
             infText = document.getElementById("iAm").value;
-            let a = "Введенном тексте " + ar(infText) + " слов";
-            document.getElementById('ans').innerHTML = a;
+            let a1 = "1.В веденном тексте " + mas(infText).length + " слов";
+            let a2 = "2.В веденном тексте " + infText.length + " элементов";
+            let a3 = "3.В веденном тексте " + mas(infText).join("").length + " элементов без пробелов";
+            let obj = procent(startWord(infText));
+            let a4 = "4.В веденном тексте " + JSON.stringify(obj);
+            let chbox1 = document.getElementById('one');
+            let chbox2 = document.getElementById('two');
+            let chbox3 = document.getElementById('three');
+            let chbox4 = document.getElementById('four');
+            if (chbox1.checked) document.getElementById('ans1').innerHTML = a1;
+            if (chbox2.checked) document.getElementById('ans2').innerHTML = a2;
+            if (chbox3.checked) document.getElementById('ans3').innerHTML = a3;
+            if (chbox4.checked) document.getElementById('ans4').innerHTML = a4;
         }
 
-        function ar(a) {
-            let str = a.split(' ');
-            return str.length;
-        }
 
         iAm.onblur = function () {
             if (iAm.blur) {
                 fucus();
             }
         }
+        function mas(a) {
+            let str = [];
+            let mas = a.split(" ");
+            for (let i = 0; i < mas.length; i++) {
+                if (!mas[i] == "") {
+                    str.push(mas[i]);
+                }
+            }
+            return str;
+        }
 
+        function startWord(a) {
+            let str = [];
+            let mas = a.split("");
+            for (let i = 0; i < mas.length; i++) {
+                str.push(mas[i]);
+            }
+            return str;
+        }
+
+        function procent(a) {
+            let ob = {};
+            let count = 0;
+            for (let i = 0; i < a.length; i++) {
+
+                for (let j = 0; j < a.length; j++) {
+                    if (a[i] == a[j]) {
+                        count++;
+                    }
+                }
+                ob[a[i]] = (100 * count / a.length).toFixed(1) + " %; ";
+                count = 0;
+            }
+            return ob;
+        }
 
     </script>
 </body>
