@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <h3>Задача №1-5 Анализатор текста</h3>
+    <textarea name="" id="iAm" cols="30" rows="10" onmousemove="show(event)"></textarea>
+    <h3>Задачи №1-5. Анализатор текста</h3>
     Дан textarea. Пусть в него вводится текст:
     <ol>
 
@@ -26,7 +27,7 @@
             о процентном содержании каждого символа в тексте.</li>
         <li>релизовать чекбоксы</li>
     </ol>
-    <textarea name="" id="iAm" cols="30" rows="10"></textarea>
+
     <p id="ans1"></p>
     <p id="ans2"></p>
     <p id="ans3"></p>
@@ -52,13 +53,21 @@
             if (chbox3.checked) document.getElementById('ans3').innerHTML = a3;
             if (chbox4.checked) document.getElementById('ans4').innerHTML = a4;
         }
-
-
-        iAm.onblur = function () {
-            if (iAm.blur) {
-                fucus();
+        function show(e) {
+            if (e.clientX > 8 && e.clientX < 169 && e.clientY > 8 && e.clientY < 165) {
+                //fucus();
+                console.log("x: " + e.clientX + "\n" + "y: " + e.clientY);
             }
+            console.log("x: " + e.clientX + "\n" + "y: " + e.clientY);
         }
+        /*
+                iAm.onblur = function () {
+                    if (iAm.blur) {
+                        fucus();
+                    }
+                }
+        */
+
         function mas(a) {
             let str = [];
             let mas = a.split(" ");
