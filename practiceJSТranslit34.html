@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Транслит</title>
+</head>
+
+<body>
+    <h3>Задачи №3-4. Транслит</h3>
+    <p>Даны textarea:</p>
+    <ol>
+
+        <label>
+            <li><input type="checkbox" id="three" checked>Модифицируйте вашу задачу так, чтобы был один текстареа,
+                чекбокс и див. Если чекбокс отмечен, то пусть в див по потери фокуса выводится транслит текста, а если
+                не отмечен
+                - то текст текстареа пусть преобразуется из транслита в русский текст.</li>
+        </label>
+
+        <label>
+            <li><input type="checkbox" id="four">Модифицируйте предыдущую задачу так, чтобы текст в диве появлялся
+                не по потери фокуса, а по мере ввода текста в текстареа.</li>
+        </label>
+    </ol>
+    <textarea name="" id="iAm1" cols="20" rows="10" placeholder="первая галочка для смены языка"></textarea>
+
+    <div id="ans1"></div>
+
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js">
+    </script>
+    <script>
+        var chbox1 = document.getElementById('three');
+        var chbox2 = document.getElementById('four');
+        function fucus() {
+            infText = document.getElementById("iAm1").value;
+
+            let a1 = send(infText);
+            let a2 = sendRevers(infText);
+
+            if (chbox1.checked) {
+                document.getElementById('ans1').innerHTML = a1;
+            } else {
+
+                document.getElementById('ans1').innerHTML = a2;
+            }
+        }
+
+        iAm1.onblur = function () {
+            if (iAm1.blur) {
+                fucus();
+            }
+        }
+
+        document.addEventListener("keyup", function (event) {
+            if (event.code && chbox2.checked) {
+                fucus();
+            }
+        });
+
+        function send(text) {
+            var transl = new Array();
+            transl['А'] = 'A'; transl['а'] = 'a';
+            transl['Б'] = 'B'; transl['б'] = 'b';
+            transl['В'] = 'V'; transl['в'] = 'v';
+            transl['Г'] = 'G'; transl['г'] = 'g';
+            transl['Д'] = 'D'; transl['д'] = 'd';
+            transl['Е'] = 'E'; transl['е'] = 'e';
+            transl['Ё'] = 'Yo'; transl['ё'] = 'yo';
+            transl['Ж'] = 'Zh'; transl['ж'] = 'zh';
+            transl['З'] = 'Z'; transl['з'] = 'z';
+            transl['И'] = 'I'; transl['и'] = 'i';
+            transl['Й'] = 'J'; transl['й'] = 'j';
+            transl['К'] = 'K'; transl['к'] = 'k';
+            transl['Л'] = 'L'; transl['л'] = 'l';
+            transl['М'] = 'M'; transl['м'] = 'm';
+            transl['Н'] = 'N'; transl['н'] = 'n';
+            transl['О'] = 'O'; transl['о'] = 'o';
+            transl['П'] = 'P'; transl['п'] = 'p';
+            transl['Р'] = 'R'; transl['р'] = 'r';
+            transl['С'] = 'S'; transl['с'] = 's';
+            transl['Т'] = 'T'; transl['т'] = 't';
+            transl['У'] = 'U'; transl['у'] = 'u';
+            transl['Ф'] = 'F'; transl['ф'] = 'f';
+            transl['Х'] = 'X'; transl['х'] = 'x';
+            transl['Ц'] = 'C'; transl['ц'] = 'c';
+            transl['Ч'] = 'Ch'; transl['ч'] = 'ch';
+            transl['Ш'] = 'Sh'; transl['ш'] = 'sh';
+            transl['Щ'] = 'Shh'; transl['щ'] = 'shh';
+            transl['Ъ'] = '"'; transl['ъ'] = '"';
+            transl['Ы'] = 'Y\''; transl['ы'] = 'y\'';
+            transl['Ь'] = '\''; transl['ь'] = '\'';
+            transl['Э'] = 'E\''; transl['э'] = 'e\'';
+            transl['Ю'] = 'Yu'; transl['ю'] = 'yu';
+            transl['Я'] = 'Ya'; transl['я'] = 'ya';
+
+            var result = '';
+            for (i = 0; i < text.length; i++) {
+                if (transl[text[i]] != undefined) {
+                    result += transl[text[i]];
+                } else {
+                    result += text[i];
+                }
+            }
+            return result
+        }
+
+        function sendRevers(text) {
+            var tra = new Array();
+            tra['A'] = 'Эй'; tra['a'] = 'эй';
+            tra['B'] = 'Би'; tra['b'] = 'би';
+            tra['C'] = 'Си'; tra['c'] = 'си';
+            tra['D'] = 'Ди'; tra['d'] = 'ди';
+            tra['E'] = 'И'; tra['e'] = 'и';
+            tra['F'] = 'Эф'; tra['f'] = 'эф';
+            tra['G'] = 'Джи'; tra['g'] = 'джи';
+            tra['H'] = 'Эйч'; tra['h'] = 'эйч';
+            tra['I'] = 'Ай'; tra['i'] = 'ай';
+            tra['J'] = 'Джей'; tra['j'] = 'джей';
+            tra['K'] = 'Кей'; tra['k'] = 'кей';
+            tra['L'] = 'Эл'; tra['l'] = 'эл';
+            tra['M'] = 'Эм'; tra['m'] = 'эм';
+            tra['N'] = 'Эн'; tra['n'] = 'эн';
+            tra['O'] = 'Оу'; tra['o'] = 'оу';
+            tra['P'] = 'Пи'; tra['p'] = 'пи';
+            tra['Q'] = 'Кью'; tra['q'] = 'кью';
+            tra['R'] = 'Ар'; tra['r'] = 'ар';
+            tra['S'] = 'Эс'; tra['s'] = 'эс';
+            tra['T'] = 'Ти'; tra['t'] = 'ти';
+            tra['U'] = 'Ю'; tra['u'] = 'ю';
+            tra['V'] = 'Ви'; tra['v'] = 'ви';
+            tra['W'] = 'В'; tra['w'] = 'в';
+            tra['X'] = 'Икс'; tra['x'] = 'икс';
+            tra['Y'] = 'Вай'; tra['y'] = 'вай';
+            tra['Z'] = 'Зет'; tra['z'] = 'зет';
+
+            var res = '';
+            for (i = 0; i < text.length; i++) {
+                if (tra[text[i]] != undefined) {
+                    res += tra[text[i]];
+                } else {
+                    res += text[i];
+                }
+            }
+            return res;
+        }
+
+    </script>
+</body>
+
+</html>
