@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>игра про число</title>
+</head>
+
+<body>
+    <h3>Игра угадай число</h3>
+    <p>Сейчас мы с вами реализуем игру угадай число.
+        В этой игре компьютер загадывает число от 1 до 100.
+        В инпут на экране игрок вводит число от 1 до 100,
+        пытаясь угадать, что же загадал компьютер.
+        Если игрок ввел число, меньше загаданного,
+        компьютер должен написать 'введите число побольше',
+        а если введено больше загаданного, то, соответственно,
+        компьютер должен написать 'введите число поменьше'.</p>
+    <input type="search" id="here">
+    <input type="button" value="нажми для проверки" id="but">
+    <p id="ans"></p>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        let count = 0;
+        function game() {
+            let pasUser = +document.getElementById('here').value;
+            let act = num(pasUser);
+            document.getElementById('ans').innerHTML = act;
+        }
+        document.getElementById('but').addEventListener('click', game);
+
+        let number = ourNumber();
+        function ourNumber() {
+            return Math.floor(Math.random() * 100);
+        }
+        console.log(number);
+        function num(a) {
+            count++;
+            if (a > 100 || a < 0) {
+                return "в диапазоне от 0 до 100)))";
+            } else if (!parseInt(a)) {
+                return "не корректные данные"
+            } else if (a < number) {
+                return "введите число побольше";
+            } else if (a > number) {
+                return "введите число поменьше";
+            } else if (a == number) {
+                return "вы угадали это число за " + count + " попыток "
+                    + "(загаданное число " + a + ")";
+            }
+        }
+
+    </script>
+</body>
+
+</html>
