@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>задача1-2</h3>
+	<input type="text" id="inp">
+	<input type="text" id="inp1">
+	<input type="text" id="inp2">
+	<button id="pu"></button>
+	<p id="viv">повтор введенного</p>
+	<h3>задача3</h3>
+	<input type="text" id="inpLast">
+	<p id="viv1"></p>
+	<h3>задача4</h3>
+	<input type="text" id="srAr">
+	<p id="srA"></p>
+	<h3>задача5-6-7</h3>
+	<input type="text" id="fio" value="">
+	<p id="kol"></p>
+	<input type="text" id="f" value="">
+	<input type="text" id="i" value="">
+	<input type="text" id="o" value="">
+	<h3>задача8</h3>
+	<input type="text" id="dat" value="введите дату через точку">
+	<h3>задача9 полиндром</h3>
+	<input type="text" id="pol" value="">
+	<h3>задача10 проверка на число 3</h3>
+	<input type="text" id="check3" value="">
+	<h3>задача11-12</h3>
+	<p id="p1">pervij</p>
+	<a id="p2" href="URL">www.tut.by</a>
+	<button id="p12">push</button>
+	<h3>задача14 квадрат по нажатию</h3>
+	<p id="elem">5</p>
+	<p id="elem1">10</p>
+	<h3>задача15 дата через .</h3>
+	<input id="dD" type="text" value="dd.mm.gggg">
+	<h3>задача16 </h3>
+	<input type="text" id="manip" value="">
+	<button id="plus">+1</button>
+	<button id="minus">-1</button>
+	<h3>задача17 суммаКликов</h3>
+	<input id="sumClick" type="text" value="">
+	<p id='here1'>-------</p>
+	<p id='here2'>-------</p>
+	<h3>задача18 добавление стран в список</h3>
+	<input type="text" id="country">
+	<button id="countr">push</button>
+	<h3>задача19 добавление стран в абзац</h3>
+	<input type="text" id="pcountry">
+	<button id="pcountr">push</button>
+	<p id="hereCountry"></p>
+
+	<script>
+		let inp = document.querySelector('#inp');
+		let inp1 = document.querySelector('#inp1');
+		let inp2 = document.querySelector('#inp2');
+		let viv = document.querySelector('#viv');
+		let viv1 = document.querySelector('#viv1');
+		let pu = document.querySelector('#pu');
+		let srAr = document.querySelector('#srAr');
+		let srA = document.querySelector('#srA');
+		let fio = document.querySelector('#fio');
+		let f = document.querySelector('#f');
+		let i = document.querySelector('#i');
+		let o = document.querySelector('#o');
+		let kol = document.querySelector('#kol');
+		let dat = document.querySelector('#dat');
+		let pol = document.querySelector("#pol");
+		let p1 = document.querySelector('#p1');
+		let p2 = document.querySelector('#p2');
+		let p12 = document.querySelector('#p12');
+		let elem = document.querySelector('#elem');
+		let elem1 = document.querySelector('#elem1');
+		let dD = document.querySelector('#dD');
+		let manip = document.querySelector('#manip');
+		let plus = document.querySelector('#plus');
+		let minus = document.querySelector('#minus');
+		let sumClick = document.querySelector('#sumClick');
+		let here1 = document.querySelector('#here1');
+		let here2 = document.querySelector('#here2');
+		let sumCl = 0;
+		let check3 = document.querySelector('#check3');
+		let country = document.querySelector('#country');
+		let countr = document.querySelector('#countr');
+		let pcountry = document.querySelector('#pcountry');
+		let pcountr = document.querySelector('#pcountr');
+		let hereCountry = document.querySelector('#hereCountry');
+
+		inp.addEventListener('blur', function () {
+			viv.innerHTML = inp.value;
+		});
+		pu.addEventListener('click', function () {
+			let sum = +inp.value + +inp1.value + +inp2.value;
+			viv1.innerHTML = sum;
+		});
+		let inpLast = document.querySelector('#inpLast');
+		inpLast.addEventListener('blur', function () {
+			viv1.innerHTML = "сумма цифр: " + sumMno(inpLast.value);
+		});
+
+		function sumMno(a) {
+			let sum = 0;
+			for (let i = 0; i < a.length; i++) {
+				sum += +a[i];
+			}
+			return sum;
+		}
+
+		srAr.addEventListener("blur", function () {
+			console.log(workString(srAr.value));
+			srA.innerHTML = workString(srAr.value);
+		});
+		let aur;
+		function workString(a) {
+			let ab = 0;
+			aur = a.split(',');
+			for (let i = 0; i < aur.length; i++) {
+				ab += Number(aur[i]);
+			}
+			return ab / aur.length;
+		}
+
+		fio.addEventListener('blur', function () {
+			let mas = [];
+			mas = delFio(fio.value);
+			f.value = mas[0];
+			i.value = mas[1];
+			o.value = mas[2];
+			fio.value = mas.join(' ').toUpperCase();
+			kol.innerHTML = mas.length;
+		});
+		function delFio(a) {
+			typeof String(a);
+			aur = a.split(' ');
+			return aur;
+		}
+		dat.addEventListener('click', function () {
+			dat.value = "";
+		});
+		dat.addEventListener('blur', function () {
+			dat.value = dat.value.split('.').reverse().join('-');
+		});
+
+		pol.addEventListener("blur", function () {
+			pol.value = polin(pol.value);
+		});
+		function polin(a) {
+			let prov = 0;
+			let last = a.length - 1;
+			for (let i = 0; i < last; i++ , last--) {
+				console.log(i);
+				console.log(last);
+				if (a[i] != a[last]) {
+					prov = 0;
+					console.log("chislo NE polindrom");
+				} else {
+					console.log('polindrom');
+					prov = 1;
+				}
+			}
+			return prov > 0 ? "slovo '" + a + "' - polindrom" : "slovo '" + a + "' -  ne polindrom";
+		}
+
+		check3.addEventListener('blur', function () {
+			check3.value = che3(check3.value);
+		});
+
+		function che3(a) {
+			let str = String(a);
+			let ord = 0;
+			for (let i = 0; i < str.length; i++) {
+				if (str[i] == "3") {
+					ord = 1;
+					break;
+				}
+
+			}
+			return ord > 0 ? "o da" : 'nea';
+		}
+		p12.addEventListener('click', function () {
+			p1.innerHTML = p1.innerHTML + 1;
+			p2.innerHTML = p2.href + " " + 2;
+		});
+
+		elem.addEventListener('click', func);
+		elem1.addEventListener('click', func);
+		function func() {
+			this.innerHTML = this.innerHTML * this.innerHTML;
+		}
+		dD.addEventListener('click', function () {
+			dD.value = "";
+		});
+		dD.addEventListener("blur", function () {
+			dD.value = dataDay(dD.value);
+		});
+
+		function dataDay(a) {
+			let days = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+			let arr = a.split('.');
+			let date = new Date(Number(arr[2]), Number(arr[1] - 1), Number(arr[0]));
+			return days[date.getDay()];
+		}
+
+		plus.addEventListener("click", function () {
+			manip.value = Number(manip.value) + 1;
+		});
+		minus.addEventListener("click", function () {
+			if (manip.value > 0) {
+				manip.value = Number(manip.value) - 1;
+			}
+			else {
+				manip.value = -0;
+			}
+		});
+
+		here1.addEventListener('click', function () {
+			sumCl = sumCl + 1;
+			sumClick.value = sumCl;
+		});
+		here2.addEventListener('click', function () {
+			sumCl = sumCl + 1;
+			sumClick.value = sumCl;
+		});
+
+		countr.addEventListener('click', function () {
+			let arr = country.value.split(',');
+			countr.insertAdjacentHTML('afterend', "<ol id='olo'>")
+			for (let i = 0; i < arr.length; i++) {
+				olo.insertAdjacentHTML('beforeend', '<li>' + arr[i] + '</li>');
+			}
+			countr.insertAdjacentHTML('afterend', "</ol>")
+		});
+
+		pcountr.addEventListener('click', function () {
+			hereCountry.innerHTML = hereCountry.innerHTML + pcountry.value + ",";
+		});
+/*Задача 1
+		
+		Дан инпут и абзац. По потери фокуса в инпуте запишите значение инпута в конец текста абзаца.
+		
+		Задача 2
+		Дано несколько инпутов, абзац и кнопка. По нажатию на кнопку получите числа, стоящие в этих инпутах и запишите их сумму в абзац.
+		
+		Задача 3
+		
+		Дан инпут. В него вводится число. По потери фокуса найдите сумму цифр этого числа.
+		
+		Задача 4
+		
+		Дан инпут. В него вводятся числа через запятую. По потери фокуса найдите среднее арифметическое этих чисел (сумма делить на количество).
+		
+		Задача 5
+		
+		Даны 4 инпута. В первый инпут вводится ФИО через пробел. По потери фокуса запишите фамилию, имя и отчество в остальные 3 инпута.
+		
+		Задача 6
+		
+		Дан инпут. В него вводится ФИО через пробел. ФИО вводится с маленькой буквы. Сделайте так, чтобы по потери фокуса инпутом, введенные фамилия, имя и отчество автоматически стали записанными с большой буквы (в этом же инпуте).
+		
+		Задача 7
+		
+		Дан инпут. В него вводится текст. По потери фокуса узнайте количество слов в этом тексте.
+		
+		Задача 8
+		
+		Дан инпут. В него вводится дата в формате 31.12.2016. По потери фокуса в этом же инпуте поставьте эту дату в формате 2016-12-31.
+		
+		Задача 9
+		
+		Дан инпут. В него вводится слово. По нажатию на кнопку проверьте то, что это слово читается с начала и с конца одинаково (например, мадам).
+		
+		Задача 10
+		
+		Дан инпут. В него вводится число. Проверьте по потери фокуса, что это число содержит внутри себя цифру 3.
+		
+		Задача 11
+		
+		Даны несколько абзацев и кнопка. По нажатию на кнопку запишите в конец каждого абзаца его порядковый номер.
+		
+		Задача 12
+		
+		Даны ссылки. Добавьте в конец каждой ссылки ее href в круглых скобках.
+		
+		Задача 13
+		
+		Даны ссылки. Если ссылка начинается с http://, то добавьте ей в конец стрелку → (делается так: &rarr;).
+		
+		Задача 14
+		
+		Даны несколько абзацев с числами. По нажатию на любой абзац запишите в него квадрат числа, которое в нем находится.
+		
+		Задача 15
+		
+		Дан инпут. В него вводится дата в формате 31.12.2016. По потери фокуса узнайте день недели (словом), который приходится на эту дату.
+		
+		Задача 16
+		
+		Дан инпут. Реализуйте кнопочки +1, -1, которые будут увеличивать или уменьшать на 1 значение инпута. Сделайте так, чтобы это значение не могло стать меньше нуля.
+		
+		Задача 17
+		
+		Дан инпут. Даны абзацы. Пусть в этот инпут записывается суммарное количество нажатий по этим абзацам.
+		
+		Задача 18
+		
+		В инпут через запятую вводятся страны. По нажатию на кнопку сделайте так, чтобы эти страны записались в ul под инпутом (каждая страна отдельный li).
+		
+		Задача 19
+		
+		В инпут вводится страна и нажимается Enter. По нажатию на Enter сделайте так, чтобы введенные страны записывались в абзац под инпутом через запятую. То есть по каждому нажатию Enter в абзац будут добавляться все новые и новые страны.
+		*/
+
+
+	</script>
+
+</body>
+
+</html>
