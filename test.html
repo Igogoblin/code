@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<style>
+    tabl,
+    tr,
+    td {
+        border: 1px solid black;
+        width: 20px;
+        height: 20px;
+    }
+</style>
+
+<body>
+    <h1>Игра угадай ячейку N6 (1,2)</h1>
+    <p>когда вы нажимаете на ячейку и ничего не происходит, это не так, в это время компьютер думает как ему походить,
+        просто повторите попытку, иногда он туго думает)))
+    </p>
+    <p>Выбeрете количество загаданных ячеек:</p>
+
+    <p><input type="range" min="1" max="10" step="1" id="quantityBoxes"></input>
+        <input type="text" id="quantityBoxesDouble" style="width: 15px;"></input></p>
+    </div>
+    <div>
+        <p>выбeрете размер поля:</p>
+        <p><input type="button" id="easyLvl" value="лЁгенько">
+            <input type="button" id="normLvl" value="нормально">
+            <input type="button" id="hardLvl" value="лучше не стоит"></p>
+    </div>
+    <hr>
+    <div><input type="button" id="start" value="старт" style="width: 80px;"></div>
+    <table id="tabl"></table>
+    <p id="here"></p>
+    <p id="here1"></p>
+    <input type="button" id="push" value="p">
+
+
+
+    <script>
+
+        let quantityBoxes = document.querySelector('#quantityBoxes');
+        let tabl = document.querySelector('#tabl');
+        let quantityBoxesDouble = document.querySelector('#quantityBoxesDouble');
+        let easyLvl = document.querySelector('#easyLvl');
+        let normLvl = document.querySelector('#normLvl');
+        let hardLvl = document.querySelector('#hardLvl');
+        let start = document.querySelector('#start');
+        let push = document.querySelector('#push');
+        let here = document.querySelector('#here');
+        let here1 = document.querySelector('#here1');
+        let lvl = 10;
+        let timeId;
+        let a = 1;
+        let other = 0;
+        let arr = [];
+        let comp = 0;
+        let gamer = 0;
+        let bal;
+        // Угадать ячейку
+
+
+
+
+        let count = 0;
+
+
+
+
+        quantityBoxes.addEventListener('change', function () {
+            quantityBoxesDouble.value = quantityBoxes.value;
+            bal = quantityBoxes.value;
+        });
+        quantityBoxesDouble.addEventListener('blur', function () {
+            quantityBoxes.value = quantityBoxesDouble.value;
+            bal = quantityBoxes.value;
+        });
+        push.addEventListener('click', function () {
+            here1.innerHTML = "box-" + quantityBoxes.value + "; " + "lvl-" + lvl;
+
+        });
+        easyLvl.addEventListener('click', function () {
+            easyLvl.style.border = "3px dotted red";
+            normLvl.style.border = "1px solid black";
+            hardLvl.style.border = "1px solid black";
+            lvl = 6;
+        });
+        normLvl.addEventListener('click', function () {
+            normLvl.style.border = "4px dotted red";
+            easyLvl.style.border = "1px solid black";
+            hardLvl.style.border = "1px solid black";
+            lvl = 10;
+        });
+        hardLvl.addEventListener('click', function () {
+            hardLvl.style.border = "5px dotted red";
+            easyLvl.style.border = "1px solid black";
+            normLvl.style.border = "1px solid black";
+            lvl = 12;
+        });
+
+        start.addEventListener('click', function () {
+            tim = lvl * lvl;
+            let between = lvl;
+            let partNumber = Math.floor(Math.random() * +1);
+            for (let i = 0; i < quantityBoxes.value; i++) {
+                arr[i] = randomInteger(between - lvl + 1, between);
+                between += lvl;
+            }
+            // переработать создание массива
+            console.log(arr);
+
+            timeId = setInterval(function () {
+                here.innerHTML = tim--;
+                if (tim == 0) {
+                    clearInterval(timeId);
+                    //функция подсчета
+                    here.innerHTML = gamer + ":игрок| " + "" + comp + ":компьютер";
+                    alert("wremja wishlo");
+                    //fin();
+                }
+
+            }, 1000);
+
+            bal = arr.length;
+
+
+            for (let i = 0; i < lvl; i++) {
+                let tr = document.createElement('tr');
+                for (let j = 0; j < lvl; j++) {
+                    let td = document.createElement('td');
+                    td.value = a;
+                    td.id = a;
+                    td.innerHTML = '.-.';
+
+                    td.addEventListener('click', function () {
+
+                        console.log(bal + "proverka ochkov ");// proverka kol-vo ochkov
+
+                        if (bal <= 0) {
+                            clearInterval(timeId);
+                            fin();
+                        }
+                        function randomNumber() {
+                            return Math.floor(Math.random() * (tim) + 1);
+                        }
+
+                        let bot = document.getElementById(randomNumber());
+                        console.log(bot.value + "-randomnoe chislo");
+
+
+                        function checkNumber(a) {
+                            if (arr.includes(a)) {
+                                return a;
+                            }
+                            return 0;
+                        }    //chto et0 = razberis'
+
+                        //Доработать чекнумбар на просчет всех элементов
+
+                        //дальнейшее переписать условия по ячейкам
+                        //перебор массива с загаданными
+
+                        if (other == 0) {
+                            // создание массива на уменьшение и подсчет очков
+
+
+                            if ((Number(this.value)) == checkNumber(this.value)) {
+                                this.style.backgroundColor = 'green';
+                                let end = lvl * lvl - tim;
+                                //here.innerHTML = "Pozdravljau wi pobedili za " + end + " sekund";
+                                gamer++;
+                                bal--;
+                                console.log(bal + "boxes");
+                                other = 1;
+                                fin();
+                            } else {
+                                this.style.backgroundColor = 'red';
+                                console.log(this.value + " nazhal");
+                                other = 1;
+                            }
+
+                        } else if (other == 1) {
+                            if (document.getElementById(bot.value).style.backgroundColor == "orange") {
+                                console.log(bot.value + " eto rabotaet, esle ORANGE");
+                                //console.log(typeof a);
+
+
+                                other = 1;
+                            } else if (document.getElementById(bot.value).style.backgroundColor == "red") {
+                                console.log(bot.value + ' a vot i ja posle RED');
+
+                                other = 1;
+                            } else if (bot.value == checkNumber(bot.value) && document.getElementById(bot.value).style.backgroundColor != "green" && document.getElementById(bot.value).style.backgroundColor != "purple") {
+                                document.getElementById(bot.value).style.backgroundColor = "purple";
+                                console.log(bot.value + " komp ugadal");
+                                here.innerHTML = "Komputer win";
+                                comp++;
+                                bal--;
+
+                                fin();
+                                other = 0;
+                            } else if (bot.value == checkNumber(bot.value) && document.getElementById(bot.value).style.backgroundColor == "green") {
+                                console.log(bot.value + " komp Popalsja");
+                                other = 1;
+                            } else if (document.getElementById(bot.value).style.backgroundColor == "green") {
+                                console.log(bot.value + " proskakivaem selenoe");
+                                other = 1;
+                            } else if (document.getElementById(bot.value).style.backgroundColor == "purple") {
+                                console.log(bot.value + " komp popal na purple");
+                                other = 1;
+                            } else {
+                                document.getElementById(bot.value).style.backgroundColor = "orange";
+                                console.log(bot.value + " poka prosto orange");
+                                other = 0;
+                            }
+                        }
+
+
+
+
+
+
+
+                    });
+
+
+
+                    tr.appendChild(td)
+                    a++;
+                }
+                tabl.appendChild(tr);
+
+
+
+            }
+
+        });
+
+
+        function randomInteger(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function fin() {
+            if (bal <= 0) {
+                console.log(comp + "=comp " + gamer + "=gamer");
+                clearInterval(timeId);
+                if (comp > gamer) {
+                    here.innerHTML = "компьютер выйграл со счетом " + comp + ":" + gamer;
+                } else {
+                    here.innerHTML = "Вы выйграли у компьютера со счетом " + gamer + ":" + comp;
+                }
+            }
+
+        }
+
+    </script>
+
+</html>
