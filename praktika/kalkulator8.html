@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator8</title>
+    <style>
+        table,
+        tr,
+        td {
+            border: solid gray;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+        }
+
+        input {
+            width: 120px;
+            border: solid gray;
+        }
+
+        .tex {
+            color: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="table"><input type="text" id="here"></table>
+    <p id="memoryForUser" class="tex"></p>
+
+
+    <script>
+        let table = document.querySelector('#table');
+        let here = document.querySelector('#here');
+        let memoryForUser = document.querySelector('#memoryForUser');
+        let memory = 'in memory = 0';
+        let provision = 0;
+
+        let arr = [['00', 'M-', 'M+', 'M='], ['<', 'c', '+-', 'qrt'], [7, 8, 9, '/'],
+        [4, 5, 6, '*'], [1, 2, 3, '1/x'], [0, '+', '-', '=']];
+
+        for (let subArr of arr) {
+            let tr = document.createElement('tr');
+            for (let elem of subArr) {
+                let td = document.createElement('td');
+                td.innerHTML = elem;
+
+
+                td.addEventListener('click', function () {
+                    let a = td.innerHTML;
+                    console.log(a);
+                    if (a == '00' || a == '9' || a == '8' || a == '7' || a == '6' || a == '5' || a == '4' || a == '3' || a == '2' || a == '1' || a == '0') {
+                        here.value = here.value + td.innerHTML;
+                        console.log(typeof here.value);
+                    } else
+                        here.value = act(a);
+                    //console.log(typeof act(a));
+                    memoryForUser.innerHTML = memory;
+                });
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+
+        }
+
+
+        //realiz case
+
+        function act(x) {
+
+            switch (x) {
+                case 'M-':
+                    memory = here.value;
+                    provision = 1;
+                    break;
+                case 'M+':
+                    memory = here.value;
+                    provision = 2;
+                    break;
+                case 'M=':
+                    if (provision == 1) {
+                        return memory - +here.value.slice(2);
+                        //console.log(memory - +here.value.slice(2));
+                    } else if (provision == 2) {
+                        console.log(+memory - +here.value.slice(2));
+                        return +memory + +here.value.slice(2);
+                    }
+                    break;
+                case 'c':
+                    memory = 0;
+                    return '';
+                    break;
+                case '&lt;':
+                    return here.value.slice(0, -1);
+                    break;
+                case 'qrt':
+                    return Math.sqrt(here.value);
+                    break;
+                case '/':
+                    memory = here.value;
+                    provision = 4;
+                    break;
+                case '*':
+                    memory = here.value;
+                    provision = 5;
+                    break;
+                case '+':
+                    memory = here.value;
+                    provision = 6;
+                    break;
+                case '-':
+                    memory = here.value;
+                    provision = 7;
+                    break;
+                case '1/x':
+                    return 1 / here.value;
+                    break;
+                case '+-':
+                    if (+here.value > 0) {
+                        return -+here.value;
+                    } else if (+here.value < 0) {
+                        //console.log( +here.value);
+                        return here.value.slice(1);
+                    }
+                    break;
+                case '=':
+                    console.log(typeof +memory);
+                    console.log(typeof +here.value);
+                    if (provision == 4) {
+                        return +memory / +here.value.slice(1);
+                        break;
+                    } else if (provision == 5) {
+                        return +memory * +here.value.slice(1);
+                        break;
+                    } else if (provision == 6) {
+                        return +memory + (+here.value.slice(1));
+                        break;
+                    } else if (provision == 7) {
+                        return +memory - (+ here.value.slice(1));
+                        break;
+                    }
+                    break;
+                default:
+                    console.log("Нет таких значений");
+            }
+            return x;
+        };
+
+
+    </script>
+</body>
+
+</html>

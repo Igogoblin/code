@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <style>
+        table,
+        tr,
+        td {
+            border: solid rgb(82, 77, 77);
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="here">...</p>
+    <table id="table"></table>
+
+    <script>
+        let table = document.querySelector('#table');
+        let here = document.querySelector('#here');
+
+        let arr = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '='], ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']'], ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '"', 'caps'], ['z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', ' ']];
+        let Arr = [['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+'], ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}'],
+        ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'caps'], ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', ' ']];
+        let a = arr;
+
+        function klaw() {
+            for (let subArr of a) {
+                let tr = document.createElement('tr');
+                for (let elem of subArr) {
+                    let td = document.createElement('td');
+                    td.innerHTML = elem;
+
+                    td.addEventListener('click', function () {
+                        here.innerHTML = here.innerHTML + td.innerHTML;
+                        console.log(td.innerHTML);
+                        if (td.innerHTML == 'caps' && a != arr) {
+                            a = arr;
+                            table.innerHTML = '';
+                            setTimeout(klaw);
+                        } else if (td.innerHTML == 'caps' && a != Arr) {
+                            a = Arr;
+                            table.innerHTML = '';
+                            setTimeout(klaw);
+                        }
+                    });
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+        }
+
+        setTimeout(klaw);
+
+    </script>
+</body>
+
+</html>
