@@ -8,6 +8,7 @@
 </head>
 <body>
     <p>Task 49.4 find day</p>
+    <p>введите день рождения (день, месяц, год) и нажмите *</p>
    <div class="parent"> 
    <input type="text" class="inp"> 
    <button class="push">*</button>
@@ -40,12 +41,26 @@
 // }); 
 
 //№4
+//При заходе на страницу спросите с помощью инпута день рождения
+//пользователя. Когда он зайдет с следующий раз 
+//- напишите сколько месяцев, дней, часов, минут и секунд осталось
+// до его дня рождения. И пусть по этим числам 
+//запуститься обратный отсчет (то есть они будут тикать). 
 let parent = document.querySelector('.parent');
 let inp = document.querySelector('.inp');
 let push = document.querySelector('.push');
+let month;
+let days;
+let hours;
+let minuts;
+let seconds;
 push.addEventListener("click", function(){
    let daySweet;
    daySweet = inp.value;
+console.log(daySweet);
+   let res = daySweet.split(/[.,\s\-:]/); 
+   console.log(res);
+   console.log(typeof res[2]);
     //document.cookie = `'city=${inp.value}'`;
 // console.log(document.cookie);
 // console.log(document.cookie.city);
@@ -54,6 +69,19 @@ p.innerHTML = 60;
 parent.append (p);
 
 });
+// let now = new Date();
+// console.log(now);
+// let birstday = new Date(2015,1,6);
+// console.log(birstday);
+// let d = (birstday-now)/1000/86400/365;
+// console.log(d);
+
+//function decompozition time
+function decompozitionTime(){
+    let now = new Date();
+
+}
+
 
     </script>
 
