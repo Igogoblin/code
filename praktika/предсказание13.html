@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>предсказание 13</title>
+</head>
+<style>
+    #parent {
+        text-align: center;
+    }
+
+    #parent>* {
+        margin-bottom: 10px;
+    }
+
+    #timer {
+        font-size: 18px;
+    }
+
+    #text {
+        font-size: 17px;
+        font-style: italic;
+    }
+
+    button {
+        padding: 5px 10px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    button:not(.active) {
+        display: none;
+    }
+</style>
+
+<body>
+    <div id="parent">
+        <div id="timer">?</div>
+        <div id="text"></div>
+        <button id="start" class="active">узнать свою судьбу</button>
+        <button id="stop">получить предсказание</button>
+    </div>
+
+    <script>
+        let timer = document.querySelector('#timer');
+        let text = document.querySelector('#text');
+        let start = document.querySelector('#start');
+        let stop = document.querySelector('#stop');
+        let timerId;
+        let arr = ['начни и все получится', 'приляг отдохни, работа не волк в лес не убежит',
+            'весь день будет сопутствовать удача', 'ожидается инфляция без роста зп', 'закончив усердно неделю ожидается премия',
+            'если кто-то позвонит утром, телефон вскоре начнет тормозить', 'доделай дело за него будет хороший бонус',
+            'тебе не повезло, надо будет отчитаться перед боссом, а он не в настроении', 'улыбнись, сегодня тебе все рады',
+            'и мне интересно чем это все закончиться'];
+
+        start.addEventListener('click', function () {
+            timerId = setInterval(function () {
+
+                timer.innerHTML = Math.floor(Math.random() * 10);
+
+            }, 100);
+
+            start.classList.remove('active');
+            stop.classList.add('active');
+        });
+        stop.addEventListener('click', function () {
+            stop.classList.remove('active');
+
+            clearInterval(timerId);
+            text.innerHTML = arr[timer.innerHTML];
+            if (timer.innerHTML == 0 || timer.innerHTML % 2 == 0) {
+                text.style.color = 'green';
+            } else {
+                text.style.color = 'red';
+            }
+        });
+
+    </script>
+</body>
+
+</html>

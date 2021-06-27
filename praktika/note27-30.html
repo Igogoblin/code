@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Записная книжка</title>
+    <style>
+        #wrapper {
+            width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #menu {
+            width: 150px;
+            position: absolute;
+            right: 105%;
+        }
+
+        #notes {
+            padding: 0;
+            margin: 0;
+        }
+
+        #notes li {
+            padding: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+            border: 1px dashed gray;
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        #notes li:hover,
+        #notes li.active {
+            background: #f1f1f1;
+        }
+
+        #create button {
+            width: 100%;
+            padding: 5px;
+        }
+
+        #text textarea {
+            width: 100%;
+            height: 200px;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #text button {
+            width: 100%;
+            height: 30px;
+        }
+
+        .active {
+            color: #32a1ce;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Записная книжка</h1>
+    <div id="wrapper">
+        <div id="menu">
+            <ul id="notes">
+                <li data-key="1">запись 1<a href="#">X</a></li>
+                <li data-key="2">запись 2<a href="#">X</a></li>
+                <li data-key="3">запись 3<a href="#">X</a></li>
+            </ul>
+            <div id="create">
+                <button id="pushNewNote">новая запись</button>
+            </div>
+        </div>
+        <div id="text">
+            <textarea id="textNow"></textarea>
+            <button id="saveNote">сохранить</button>
+        </div>
+    </div>
+    <p>Решал сам, взяв за основу только html и css, пошаговые ходы решения не смотрел </p>
+
+    <script>
+        let texts = [
+            'text1',
+            'text2',
+            'text3',
+        ];
+        let pushNewNote = document.querySelector('#pushNewNote');
+        let saveNote = document.querySelector('#saveNote');
+        let textNow = document.querySelector('#textNow');
+
+        let notes = document.querySelector('#notes');
+
+        saveNote.addEventListener('click', function func() {
+            checkButton();
+            if (pushNewNote.classList.contains('active')) {
+                let liLast = document.querySelectorAll('#notes li');
+                texts.push(textNow.value);
+                let li = document.createElement('li');
+                li.innerHTML = `Запись ${liLast.length + 1}<a href="#">X</a>`;
+                li.setAttribute('data-key', liLast.length + 1);
+                notes.appendChild(li);
+                textNow.value = "";
+            } else {
+                let lis = document.querySelectorAll('li');
+                for (let i = 0; i < lis.length; i++) {
+                    if (lis[i].classList.contains('active')) {
+                        //запись в массив из тексареа
+                        let notDel = texts.splice(i, 1, textNow.value);
+                    }
+                }
+                console.log(texts);
+            }
+        });
+
+        menu.addEventListener('mouseenter', function () {
+            let lis = document.querySelectorAll('li');
+            let as = document.querySelectorAll('a');
+            for (let elem of lis) {
+
+                elem.addEventListener('click', function () {
+                    textNow.value = "";
+                    textNow.value = texts[this.getAttribute('data-key') - 1];
+                    checkClass();
+                    elem.classList.add("active");
+                    pushNewNote.classList.remove('active');
+                });
+            }
+
+            for (let elem of as) {
+                elem.addEventListener('click', function func() {
+                    elem.parentElement.remove();
+                    this.removeEventListener("click", func);
+                });
+            }
+        });
+        pushNewNote.addEventListener('click', function () {
+            pushNewNote.classList.add('active');
+            checkClass();
+        });
+        function checkClass() {
+            let lis = document.querySelectorAll('li');
+            for (let elem of lis) {
+                elem.classList.remove('active');
+            }
+        }
+
+        function checkButton() {
+            let lis = document.querySelectorAll('li');
+            let bool = 0;
+            for (let elem of lis) {
+                if (elem.classList.contains('active')) {
+                    bool = 1;
+                    return;
+                } else if (pushNewNote.classList.contains('active')) {
+                    return;
+                }
+            }
+            pushNewNote.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

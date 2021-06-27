@@ -7,7 +7,55 @@
     <title>Cookie</title>
 </head>
 <body>
-    dsa
+    <p>Task 49.4 find day</p>
+   <div class="parent"> 
+   <input type="text" class="inp"> 
+   <button class="push">*</button>
+</div>
+    <script>
+        // document.cookie = 'name=igo';
+        // document.cookie = 'age=36';
+        // console.log(document.cookie);
+
+
+// function getCookie(cname){
+//     let name = cname + '=';
+//     let decodedCookie = decodeURIComponent(document.cookie);
+//     let ca = decodeURIComponent.split(';');
+//     for(let i = 0;i<ca.length;i++){
+//         var c =ca[i];
+//         while(c.charAt(0)==' '){
+//             c = c.substring(1);
+//         }
+//         if(c.indexOf(name)==0){
+//             return c.substring(name.length, c.length);
+//         }
+//     }
+//     return '';
+// }
+
+// jQuery(document).ready(function() {
+// 	document.cookie = "name=Иван";
+// 	console.log(getCookie('name'));
+// }); 
+
+//№5
+let parent = document.querySelector('.parent');
+let inp = document.querySelector('.inp');
+let push = document.querySelector('.push');
+push.addEventListener("click", function(){
+   let daySweet;
+   daySweet = inp.value;
+    //document.cookie = `'city=${inp.value}'`;
+// console.log(document.cookie);
+// console.log(document.cookie.city);
+let p = document.createElement('p');
+p.innerHTML = 60;
+parent.append (p);
+
+});
+
+    </script>
 
 </body>
 </html>

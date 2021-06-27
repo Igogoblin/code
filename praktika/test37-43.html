@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test37-43</title>
+    <style>
+        .right {
+            border: 1px solid green;
+        }
+
+        .wrong {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <button id="button">проверить ответы</button>
+    <div id="fin"></div>
+
+
+    <script>
+
+        let questions = [
+            {
+                text: 'вопрос 1?',
+                right: 0,
+                variants: [
+                    'вариант 1',
+                    'вариант 2',
+                    'вариант 3'
+                ]
+            },
+            {
+                text: 'вопрос 2?',
+                right: 1,
+                variants: [
+                    'вариант 1',
+                    'вариант 2',
+                    'вариант 3'
+                ]
+            },
+            {
+                text: 'вопрос 3?',
+                right: 2,
+                variants: [
+                    'вариант 1',
+                    'вариант 2',
+                    'вариант 3'
+                ]
+            },
+        ];
+        let button = document.querySelector('#button');
+
+        let test = document.querySelector('#test');
+
+        let fin = document.querySelector("#fin");
+        for (let i = 0; i < questions.length; i++) {
+            let div = document.createElement('div');
+            let p = document.createElement('p');
+            test.appendChild(div);
+            p.innerHTML = questions[i].text;
+            div.appendChild(p);
+            for (let j = 1; j < 4; j++) {
+                let label = document.createElement('label');
+                label.innerHTML = `<input type="radio" name=` + i + `>Вариант ` + j;
+                div.appendChild(label);
+            }
+        }
+
+        button.addEventListener('click', function () {
+            for (let i = 0; i < questions.length; i++) {
+                let inps = document.getElementsByName(i);
+                for (let j = 0; j < inps.length; j++) {
+                    if (inps[j].checked) {
+                        if (questions[i].right == j) {
+                            console.log("на " + questions[i].text + ' дан верный ответ');
+                            let p = document.createElement('p');
+                            p.innerHTML = "на " + questions[i].text + ' дан верный ответ';
+                            fin.appendChild(p);
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

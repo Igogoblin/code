@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #parent {
+            text-align: center;
+        }
+
+        #field {
+            display: inline-block;
+        }
+
+        #field td {
+            padding: 20px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        .active {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parent">
+        <table id="field"></table>
+    </div>
+
+    <script>
+        let field = document.querySelector('#field');
+        let line = 2;
+        let column = 2;
+        let randomArr = [];
+        let helper = 1;
+
+        function build() {
+            rA();
+            console.log(line);
+            console.log(column);
+            console.log(randomArr);
+            let count = 0;
+            for (let i = 0; i < line; i++) {
+                let tr = document.createElement('tr');
+                for (let j = 0; j < column; j++) {
+                    let td = document.createElement('td');
+                    td.innerHTML = randomArr[count++];
+                    tr.appendChild(td);
+                }
+                field.appendChild(tr);
+            }
+            checkNumbar();
+        }
+        build();
+        function rA() {
+            console.log(line);
+            console.log(column);
+            for (let i = 0; i < line * column; i++) {
+                let it = i + 1;
+                randomArr[i] = it;
+            }
+            randomArr.sort(function () {
+                return .5 - Math.random();
+            });
+        }
+        function checkNumbar() {
+            let tds = document.querySelectorAll("td");
+            for (let elem of tds) {
+                elem.addEventListener("click", function () {
+                    if (elem.innerHTML == helper) {
+                        elem.classList.add('active');
+                        helper++;
+                    }
+                    if (helper == column * line + 1) {
+                        column++;
+                        line++;
+                        field.innerHTML = "";
+                        helper = 1;
+                        build();
+                    }
+                });
+            }
+        }
+    </script>
+
+</body>
+
+</html>

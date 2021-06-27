@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>replace</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //
+    let str = 'ahb acb aeb aeeb adcb axeb';
+    let a = str.replace(/a.b/g, '!');
+    console.log(a);
+    let str2 = 'aba aca aea abba adca abea';
+    let a2 = str2.replace(/a..a/g, '!');
+    console.log(a2);
+    let str3 = 'aba aca aea abba adca abea';
+    let a3 = str3.replace(/ab.a/g, "!");
+    console.log(a3);
+    console.log("№2 ");
+    //2   +(1>);  *(0||>);    ?(0||1);
+    let str21 = 'aa aba abba abbba abca abea';
+    let a21 = str21.replace(/ab+a/g, "!");
+    console.log(a21);
+    let str22 = 'aa aba abba abbba abca abea';
+    let a22 = str22.replace(/ab*a/g, "!");
+    console.log(a22);
+    let str23 = 'aa aba abba abbba abca abea';
+    let a23 = str23.replace(/ab?a/g, "!");
+    console.log(a23);
+    let str24 = 'aa aba abba abbba abca abea';
+    let a24 = str24.replace(/ab*a/g, "!");
+    console.log(a24);
+    console.log("№3");
+    //3
+    let str31 = 'ab abab abab abababab abea';
+    let a31 = str31.replace(/(ab)+/g, "!");
+    console.log(a31);
+    console.log("№4");
+    //4
+    let str41 = 'a.a aba aea';
+    let a41 = str41.replace(/a\.a/, "!");
+    console.log(a41);
+    let str42 = '2+3 223 2223';
+    let a42 = str42.replace(/2\+3/, "!");
+    console.log(a42);
+    let str43 = '23 2+3 2++3 2+++3 345 567';
+    let a43 = str43.replace(/2\++3/g, "!");
+    console.log(a43);
+    let str44 = '23 2+3 2++3 2+++3 445 677';
+    let a44 = str44.replace(/2\+*3/g, "!");
+    console.log(a44);
+    let str45 = '*+ *q+ *qq+ *qqq+ *qqq qqq+';
+    let a45 = str45.replace(/\*q+\+/g, "!");
+    console.log(a45);
+    let str46 = '[abc] {abc} abc (abc) [abc]';
+    let a46 = str46.replace(/\[...\]/g, "!");
+    console.log(a46);
+    console.log("№5");
+    //5
+    let str51 = 'aa aba abba abbba abbbba abbbbba';
+    let a51 = str51.replace(/ab{2,4}a/g, "!");
+    console.log(a51);
+    let str52 = 'aa aba abba abbba abbbba abbbbba';
+    let a52 = str52.replace(/ab{0,3}a/g, "!");
+    console.log(a52);
+    let str53 = 'aa aba abba abbba abbbba abbbbba';
+    let a53 = str53.replace(/ab{4,}a/g, "!");
+    console.log(a53);
+    console.log("№6");
+    //6
+    let str61 = 'aba accca azzza wwwwa';
+    let a61 = str61.replace(/a.+?a/g, "!");
+    console.log(a61);
+    console.log("№7");
+    //7
+    let str71 = 'a1a a2a a3a a4a a5a aba aca';
+ let a71 =str71.replace(/a\da/g,"!");
+console.log(a71);
+let str72 = 'a1a a22a a333a a4444a a55555a aba aca';
+let a72 = str72.replace(/a\d+a/g,"!");
+console.log(a72);
+let str73 = 'aa a1a a22a a333a a4444a a55555a aba aca';
+let a73  = str73.replace(/a\d*a/g,"!");
+console.log(a73);
+let str74 = 'avb a1b a2b a3b a4b a5b abb acb';
+let a74 = str74.replace(/a\Db/g,"!");
+console.log(a74);
+let str75 = 'ave a#b a2b a$b a4b a5b a-b acb';
+let a75 = str75.replace(/a\Wb/g,"!");
+console.log(a75);
+let str76 = 'ave a#a a2a a$a a4a a5a a-a aca';
+let a76 = str76.replace(/\s/g,"!");
+console.log(a76);
+console.log("№8");
+//8
+let str81 = 'aba aea aca aza axa';
+let a81 = str81.replace(/a[b-x]a/g,"!");
+console.log(a81);
+let str82 = 'a1a a3a a7a a9a aba';
+let a82 = str82.replace(/a[3-6]a/g,"!");
+console.log(a82);
+let str83 = 'aba aea afa aha aga';
+let a83 = str83.replace(/a[a-g]a/g,"!");
+console.log(a83);
+let str84 = 'aba aea afa aha aga';
+let a84 = str84.replace(/a[a-fj-z]a/g,"!");
+console.log(a84);
+let str85 = 'aAa aea aEa aJa a3a';
+let a85 = str85.replace(/a[a-fA-D]a/g,"!");
+console.log(a85);
+let str86 = 'aAXa aeffa aGha aza ax23a a3sSa';
+let a86 = str86.replace(/a[a-z]+a/g,"!");
+console.log(a86);
+let str87= 'aAXa aeffa aGha aza ax23a a3sSa';
+let a87 = str87.replace(/a[a-zA-Z]+a/g,"!");
+console.log(a87);
+let str88 = 'aAXa aeffa aGha aza ax23a a3sSa';
+let a88 = str88.replace(/a[a-z1-9]+a/g,"!");
+console.log(a88);
+console.log("№9");
+//9
+let str90 = 'xaz xbz x1z xСz';
+let a91 = str90.replace(/x[^ex]z/g,"!");
+let a92 = str90.replace(/x[^2-7]z/g,"!");
+let a93 = str90.replace(/x[^A-Z]z/g,"!");
+let a94 = str90.replace(/x[^a-zA-Z1-5]z/g,"!");
+console.log(a91);
+console.log(a92);
+console.log(a93);
+console.log(a94);
+console.log("№10");
+//10
+let str10 = 'wйw wяw wёw wqw';
+let a10 = str10.replace(/w[а-яё]w/g,"!");
+console.log(a10);
+let str11 = 'ааа ббб ёёё ззз ййй ААА БББ ЁЁЁ ЗЗЗ ЙЙЙ';
+let a11 = str11.replace(/[а-яёА-ЯЁ][а-яёА-ЯЁ][а-яёА-ЯЁ]/g,"!");
+console.log(a11);
+console.log("№11");
+//11
+let str111 = 'aba aea aca aza axa a.a a+a a*a';
+let a111 = str111.replace(/a[.+*]a/g,"!");
+console.log(a111);
+let str112 = 'xaz x.z x3z x@z x$z xrz';
+let a112 = str112.replace(/x[^.@$]z/g,"!");
+console.log(a112);
+console.log("№13");
+//13
+let str130 = 'x[]z x{}z x.z x()z';
+let a130 = str130.replace(/x[\[\]\{\}\(\)]+z/g,"!");
+console.log(a130);
+let str131 = '[abc] {abc} abc (abc) [abc]';
+let a131 = str131.replace(/[\[\]\{\}\(\)]/g,"!");
+console.log(a131);
+console.log("№14");
+//14
+let str141 = '^xx axx ^zz bkk @ss';
+let a141 = str141.replace(/[@^][a-z][a-z]/g,"!");
+console.log(a141);
+let str142 = '^xx axx ^zz bkk @ss';
+let a142 = str142.replace(/[^\^][a-z][a-z]/g,"!");
+console.log(a142);//ne sowsem
+console.log("№15");
+//15
+let str150 = 'xaz xBz xcz x-z x@z';
+let a150 = str150.replace(/x[a-zA-z-]z/g,"!");
+console.log(a150);
+let str151 = 'xaz x$z x-z xcz x+z x%z x*z';
+let a151 = str151.replace(/x[$\-+]z/g,"!");
+console.log(a151);
+console.log("№16");
+//16
+let str161 = 'abc def xyz';
+let a161 = str161.replace(/^[a-z]+/g,"!");
+console.log(a161);
+let str162 = 'abc def xyz';
+let a162 = str162.replace(/[a-z]+$/g,"!");
+console.log(a162);
+console.log("№17");
+//17
+let str17 = 'aaa bbb abb';
+let res = str17.replace(/a{3}|b{3}/g, '!');
+console.log(res);
+let str171 = 'aeeea aeea aea axa axxa axxxa';
+let a171 = str171.replace(/a(e+|x+)a/g,"!");
+console.log(a171);
+let str172 = 'aeeea aeea aea axa axxa axxxa';
+let a172 = str172.replace(/a(e{2}|x+)a/g,"!");
+console.log(a172);
+</script>
+
+</html>

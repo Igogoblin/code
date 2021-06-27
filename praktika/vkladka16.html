@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вкладки16</title>
+    <style>
+        #parent {
+            margin: 0 auto;
+            width: 400px;
+        }
+
+        .menu a {
+            margin-right: 5px;
+            display: inline-block;
+            padding: 10px;
+            color: black;
+            text-decoration: none;
+            border: 1px solid gray;
+        }
+
+        .menu a:hover {
+            background: #f8f8f8;
+        }
+
+        .menu a.active {
+            border-color: transparent;
+            background: #f2f2f2;
+        }
+
+        .tabs .tab:not(.active) {
+            display: none;
+        }
+
+        .tabs .tab {
+            padding: 10px;
+            background: #f2f2f2;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parent">
+        <div class="menu">
+            <a href="" target="_self" class="active">вкладка 1</a>
+            <!---->
+            <a href="" target="_self" class="">вкладка 2</a>
+            <a href="" target="_self" class="">вкладка 3</a>
+        </div>
+        <div class="tabs">
+            <div class="tab ">
+                <!---->
+                текст вкладки 1
+            </div>
+            <div class="tab">
+                текст вкладки 2
+            </div>
+            <div class="tab">
+                текст вкладки 3
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let parentsA = document.querySelectorAll("a");
+        let cl = document.getElementsByClassName('tab');
+
+        console.log(parentsA.length);
+
+        for (let i = 0; i < parentsA.length; i++) {
+            parentsA[i].href = "#";
+
+            parentsA[i].addEventListener('click', function () {
+                for (let j = 0; j < parentsA.length; j++) {
+                    parentsA[j].classList.remove('active');
+                    cl[j].classList.remove('active');
+                }
+                this.classList.toggle('active');
+                cl[i].classList.toggle('active');
+            });
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>

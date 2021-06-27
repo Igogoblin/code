@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>крестики нолики 48-53</title>
+    <style>
+        #field td {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table id="field">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+    <p id="here"></p>
+    <hr>
+    <p>решал сам без подсказок </p>
+    <script>
+        let cells = document.querySelectorAll('#field td');
+        let here = document.querySelector('#here');
+        let step = 0;
+        let firstPleer = {
+            poz: "X",
+            count: 0,
+            firstArr: [],
+        };
+        let twoPleer = {
+            poz: "O",
+            count: 0,
+            twoArr: [],
+        };
+
+        let algo = [[1, 2, 0], [3, 4, 5], [6, 7, 8], [3, 0, 6], [1, 4, 7], [2, 5, 8], [4, 0, 8], [2, 4, 6]];
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].addEventListener('click', function () {
+                step++;
+                if (step == 9) {
+                    here.innerHTML = "ничья";
+                }
+                if (step % 2 != 0) {
+                    this.innerHTML = firstPleer.poz;
+                    firstPleer.firstArr.push(i);
+                    if (win(firstPleer.firstArr)) {
+                        here.innerHTML = "Победил первый игрок";
+                    }
+                } else if (step % 2 == 0) {
+                    this.innerHTML = twoPleer.poz;
+                    twoPleer.twoArr.push(i);
+                    if (win(twoPleer.twoArr)) {
+                        here.innerHTML = "Победил второй игрок";
+                    }
+                }
+            });
+        }
+
+        function win(arr) {
+            for (let i = 0; i < algo.length; i++) {
+                let mid = 0;
+                for (let j = 0; j < 3; j++) {
+                    for (let k = 0; k < arr.length; k++) {
+                        if (algo[i][j] == arr[k]) {
+                            mid++;
+                            if (mid == 3) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+    </script>
+</body>
+
+</html>

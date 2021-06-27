@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .colorButton {
+            color: green;
+            background-color: rgb(209, 219, 180);
+        }
+
+        .active {
+            display: none;
+        }
+
+        h2 {
+            font: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Игра в города</h3>
+    <p>выбери игру: два игрока <button id="pleerTwo">p1 Vs p2</button>, против компьютера <button id="pleerComp">p1 Vs
+            Comp</button></p>
+    <input id="field">
+    <button id="push">ввод</button>
+    <div>
+        <p id="showStep"></p>
+        <p id="step"></p>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        let field = document.querySelector('#field');
+        let push = document.querySelector('#push');
+        let message = document.querySelector('#message');
+        let pleerTwo = document.querySelector('#pleerTwo');
+        let pleerComp = document.querySelector('#pleerComp');
+        let step = document.querySelector("#step");
+        let showStepP = document.querySelector('#showStep');
+        let ps = document.querySelectorAll('p');
+        let lvl = 0;
+        let compWord = "";
+        let showStep = 2;
+        let countMistake = 0;
+        let pleer = 0;
+        let countWord = 0;
+        let citys = ['Абингдон', 'Амстердам', 'Анадырь', 'Анапа', 'Антананариву', 'Антверпен', 'Анкара', 'Алупка', 'Алушта', 'Архангельск', 'Астрахань', 'Атланта', 'Афины',
+            'Баден', 'Базель', 'Бангалор', 'Барановичи', 'Баку', 'Белград', 'Барселона', 'Берлин', 'Береза', 'Берн', 'Биробиджан', 'Бонн', 'Бобруйск', 'Борисов', 'Бостон', 'Брест', 'Бремен', 'Брюсель', 'Бухарест', 'Буффало',
+            'Варшава', 'Вашингтон', 'Веймар', 'Вельс', 'Вельск', 'Вена', 'Венеция', 'Витебск', 'Винница', 'Владивосток', 'Волгоград', 'Волковыск', 'Вологда', 'Воронеж', 'Воркута', 'Вильнюс',
+            'Гамбург', 'Ганновер', 'Гданьск', 'Гдыня', 'Генуя', 'Гомель', 'Гродно', "Дамаск", 'Денвер', 'Детройт', 'Дели', 'Донецк', 'Дорчестер', 'Джанкой', 'Джамбул', 'Днепропетровск', 'Днепр', 'Дзержинск', 'Дрезден', 'Дублин', 'Душанбе', 'Евпатория', 'Ереван', 'Есентуки', 'Ель',
+            'Жабинка', 'Женева', 'Жодино', 'Жлобин', 'Заславль', 'Иваново', 'Ивацевичи', 'Иерусалим', 'Измаил', 'Иркутск', 'Ижевск', 'Казань', 'Калгари', 'Калининград', 'Калуга', 'Караганда', 'Керчь', 'Кёльн', 'Киев', 'Киншаса', 'Кишинев', 'Клайпеда', 'Климовичи', 'Копенгаген', 'Константинополь', 'Котор', 'Краков', 'Красноярск',
+            'Краснодар', 'Кричев', 'Киров', 'Курск', 'Лейпциг', 'Лион', 'Лиссабон', 'Лондон', 'Лос-Анджелес', 'Луганск', 'Львов', 'Мадрид', 'Мальборк', 'Марсель', 'Минск', 'Милан', 'Мирный', 'Могилев', 'Молодечно', 'Москва', 'Мозырь', 'Монреаль', 'Мурманск', 'Мухосранск', 'Мюнхен',
+            'Неаполь', 'Новгород', 'Ницца', 'Новогрудок', 'Новосибирск', 'Норильск', 'Нью-Йорк', 'Нюрнберг', 'Омск', 'Осиповичи', 'Осло', 'Оренбург', 'Орел', 'Орша', 'Оттава', 'Париж', 'Пермь', 'Пекин', 'Пенза', 'Пинск', 'Пиза', 'Полтава', 'Прага', 'Псков', 'Ржев', 'Рига', 'Рим', 'Рио-де-Жанейро', 'Рогачев',
+            'Ростов-на-Дону', 'Рязань', 'Речица', 'Салоники', 'Самара', 'Сан-Франциско', 'Сараево', 'Светлогорск', 'Севастополь', 'Северодвинск', 'Сиэтл', 'Симферополь', 'Солигорск', 'Слоним', 'Слуцк', 'Советск', 'Сорренто', 'Сочи', 'София', 'Стамбул', 'Страсбург', 'Стокгольм', 'Смоленск', 'Сморгонь', 'Таганрог',
+            'Тамбов', 'Ташкент', 'Тбилиси', 'Тверь', 'Тегеран', 'Тель-Авив', 'Тмутаракань', 'Тобольск', 'Томск', 'Торонто', 'Токио', 'Трир', 'Триполи', 'Туров', 'Турин', 'Тула', 'Тюмень', 'Урюпинск', 'Фаниполь', 'Феодосия', 'Хабаровск', 'Ханты-Мансийск', 'Харьков', 'Ханой', 'Хельсинки', 'Хойники', 'Химки', 'Хьюстон',
+            'Цюрих', 'Чернигов', 'Черкасы', 'Чикаго', 'Ялта', 'Якутск'];
+        let bc = [];
+        let helpForCitys = {
+            forMistakeArr: ["не забывай, город должен начинаться с последней буквой названного города",
+                "опять двадцать пять, первая - последняя, последняя - первая, что сложного",
+                "ты же слышал на какую букву заканчивался город соперника?",
+                "если у тебя не получается, может мы без тебя сыграем",
+                "прочти правила, походу галочку в соглашении кто-то не поставил",
+                "часики-то тикают, давай уже нормально отвечай",
+                "не, не то или не та",
+                "у нас в базе не настолько много городов",
+                "попробуй еще раз",
+                "хорошая попытка, но не"
+            ],
+
+            fin: ['конец игры', 'и у нас выявился победитель',
+                'ну, слов много, а городов мало',
+                'вот и все',
+                'и кто же смог',
+                'как-то быстро получилось',
+                'до искусственного интеллекта еще далеко',
+                'игра закончилась',
+                'хватит уже, все все поняли',
+                'может, потом еще раз попробуем'
+            ],
+        };
+        let alphavit = ['а', 'б', 'в', 'г', 'д', 'е',
+            'ж', 'з', 'и', 'к', 'л', 'м',
+            'н', 'о', 'п', 'р', 'с', 'т', 'у',
+            'ф', 'ч', 'ц', 'ч', 'ш', 'щ',
+            'ы', 'э', 'ю', 'я'];
+        //second way for randomWord;
+        // var mabieWord = "adfghjkkl;zcvbn.,qewrtopy";
+        //for(let i = 0;i<5)
+        // text = mabieWord.charAt(Math.floor(Math.random()*mabieWord.length));
+
+        pleerTwo.addEventListener('click', function () {
+            pleerTwo.classList.toggle('colorButton');
+            if (pleerComp.classList.contains('colorButton')) {
+                pleerComp.classList.remove('colorButton');
+            }
+            lvl = 0;
+        });
+
+        pleerComp.addEventListener('click', function () {
+            pleerComp.classList.toggle('colorButton');
+            if (pleerTwo.classList.contains('colorButton')) {
+                pleerTwo.classList.remove('colorButton');
+            }
+            lvl = 1;
+        });
+
+        field.addEventListener('click', function () {
+            if (bc.length == 0) {
+                showStepP.innerHTML = "начинаем игру";
+            } else
+                showStepP.innerHTML = 'ход: ' + showStep++ + " последний город - " + bc[bc.length - 1];
+            field.value = "";
+            if (bc.length % 2 != 0) {
+
+                step.innerHTML = "Ход второго игрока";
+                pleer = 1;
+            } else if (bc.length % 2 == 0) {
+
+                step.innerHTML = "Ход первого игрока";
+                pleer = 2;
+            }
+        });
+
+        function stepComp() {
+            push.classList.add('active');
+            step.innerHTML = "Ход компьютера";
+            //message.innerHTML = "подождите";
+
+            if (Math.floor(Math.random() * 2) == 1) {
+                console.log("taki vipalo");
+                randomWord();
+                console.log(compWord);
+                showStepComp(compWord);
+                countMistake++;
+                console.log(countMistake);
+                if (countMistake >= 3) {
+                    console.log(countMistake);
+                    pleer = 1;
+                    countMistakeEnd();
+                }
+                field.value = "";
+                stepComp();
+            } else {
+                let lastLetter;
+                let newArr = [];
+                lastLetter = bc[bc.length - 1][bc[bc.length - 1].length - 1].toUpperCase();
+                console.log(lastLetter);
+                if (lastLetter == 'Ь') {
+                    lastLetter = bc[bc.length - 1][bc[bc.length - 1].length - 2].toUpperCase();
+                }
+                for (let i = 0; i < citys.length; i++) {
+                    if (citys[i][0] == lastLetter) {
+                        newArr.push(citys[i]);
+                    }
+                }
+                if (newArr.length < 1) {
+                    pleer = 1;
+                    countMistakeEnd();
+                }
+                console.log(newArr);
+
+                let newCompWord;
+                function compCheckArr() {
+                    newCompWord = newArr[Math.floor(Math.random() * newArr.length - 1)];
+                    if (bc.includes(newCompWord)) {
+                        compCheckArr();
+                    }
+                    return newCompWord;
+                }
+
+
+                compCheckArr();
+                bc.push(newCompWord);
+                console.log(bc);
+                showStepComp(bc[bc.length - 1]);
+                console.log(bc);
+                showStep.innerHTML = "компьютер называет " + bc[bc.length - 1];
+                pleer = 2;
+            }
+
+            push.classList.remove('active');
+        }
+
+
+        push.addEventListener('click', function () {
+            if (lvl == 0) {
+                ps[0].innerHTML = 'два игрока';
+            } else if (lvl == 1) {
+                ps[0].innerHTML = 'против компьютера';
+            }
+
+
+            let word = preparation(field.value);
+
+
+            if (checkAllArr(word)) {
+                if (checkOurArr(word) == false) {
+                    if (bc.length == 0 || checkLetter(word)) {
+                        bc.push(word);
+                        message.innerHTML = "город защитан";
+                        countMistake = 0;
+                        if (lvl == 1) {
+                            return stepComp();
+                        }
+
+                    } else if (checkLetter(word) == false) {
+                        message.innerHTML = helpForCitys.forMistakeArr[randomizer()];
+                        countMistake++;
+                    }
+
+
+                } else if (checkOurArr(word)) {
+                    message.innerHTML = "Такой город уже был";
+                    countMistake++;
+                }
+
+            } else if (checkAllArr(word) == false) {
+                message.innerHTML = "Нет такого города";
+                countMistake++;
+            }
+            if (countMistake >= 3) {
+                countMistakeEnd();
+                // let h = document.createElement('h2');
+                // message.innerHTML = `<hr>${fin[randomizer()]}`;
+                // h.innerHTML = "Победил " + pleer + " игрок";
+                // field.remove();
+                // message.appendChild(h);
+            }
+
+            console.log(bc + ' ошибок-' + countMistake);
+        });
+
+
+
+
+        function preparation(word) {
+            return word.split('')[0].toUpperCase() + word.slice(1);
+        }
+        function checkAllArr(w) {
+            return citys.includes(w);
+        }
+        function checkOurArr(w) {
+            return bc.includes(w);
+        }
+        function randomizer() {
+            return Math.floor(Math.random() * 10);
+        }
+        function checkLetter(w) {
+            if (bc[bc.length - 1].slice(-1) == 'ь') {
+                return bc[bc.length - 1].slice(-2, -1) == w.split('')[0].toLowerCase();
+            } else {
+                return bc[bc.length - 1].slice(-1) == w.split('')[0].toLowerCase();
+            }
+
+        }
+
+        function showStepComp(w) {
+            field.value = "";
+            let timerId = setInterval(function () {
+
+                field.value = field.value + w[countWord++];
+                if (countWord >= w.length) {
+                    clearInterval(timerId);
+                }
+            }, 300);
+        }
+        function randomWord() {
+            let lengthWord = Math.floor(Math.random() * 6 + 3);
+            for (let i = 0; i < lengthWord; i++) {
+                compWord += alphavit[Math.floor(Math.random() * 29)];
+            }
+            return compWord;
+        }
+        function countMistakeEnd() {
+            let h = document.createElement('h2');
+            message.innerHTML = `<hr>${helpForCitys.fin[randomizer()]}`;
+            h.innerHTML = "Победил " + pleer + " игрок";
+            field.remove();
+            message.appendChild(h);
+        }
+
+
+    </script>
+</body>
+
+</html>

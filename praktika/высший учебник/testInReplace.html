@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test в регулярках</title>
+</head>
+<body>
+    <script>
+        console.log(/a+/.test('eee aaa bbb'));
+        //Определите, начинается ли переданная строка с http://.
+        console.log(/^http:\/\//.test('http://'));
+      //  Определите, начинается ли переданная строка с http:// или с https://.
+      console.log(/^(http)|^(https):\/\//.test('http://'));
+      //Задача 18.3 Определите, что ли заканчивается переданная строка расширением txt, html или php.
+  console.log(/(\.txt)$|(\.html)$|(\.php)$/.test("a.php"));
+  //Задача 18.4 Определите, что ли заканчивается переданная строка расширением jpg или jpeg.
+  console.log(/(\.jpeg)$|(\.jpg)$/.test(".jpg"));
+ // Задача 18.5 Определите, что ли заканчивается переданная строка расширением jpg, jpeg или png.
+console.log(/(\.jpeg)$|(\.jpg)$|(\.png)$/.test("asd.jpg"));
+//Задача 18.6 Определите, является ли строка числом, длиной от 1 до 12 цифр
+console.log(/^[1-9]{1,4}/.test("123456782391234"));
+//Задача 18.7 Определите, является ли переданная строка датой в формате год-месяц-день
+ console.log();
+ </script>
+</body>
+</html>

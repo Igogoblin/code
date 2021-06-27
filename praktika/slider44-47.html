@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>слайдер44-47</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="slider">
+        <img src="1.png" class="hidden">
+        <img src="2.png" class="hidden">
+        <img src="3.jpg" class="hidden">
+    </div>
+    <script>
+        //task 47.1
+        let texts = ['1.png', '2.png', '3.png'];
+        let slider = document.querySelectorAll('#slider img');
+        let i = 0;
+
+
+
+        let timerId = setInterval(() => {
+            for (let elem of slider) {
+                if (elem.classList.contains('hidden')) {
+                }
+                elem.classList.add('hidden');
+            }
+            slider[i++].classList.remove('hidden');
+            if (i == 3) {
+                i = 0;
+            }
+        }, 1000);
+
+
+        // left.addEventListener('click', function () {
+        //     let timerId = setInterval(() => {
+        //         console.log(i);
+        //         slider.innerHTML = texts[i];
+
+        //         i++;
+        //         if (i >= 4) {
+        //             i = 0;
+        //             clearInterval(timerId);
+        //             //
+        //         }
+
+        //     }, 750);
+        //     // timerId;
+        //     // уменьшаем i на 1
+        //     // и выводим текст с номером i
+
+        // });
+        // right.addEventListener('click', function () {
+        //     console.log(i);
+        //     let timerId = setInterval(() => {
+        //         slider.innerHTML = texts[i];
+        //         i--;
+        //         if (i <= 0) {
+        //             i = 4;
+        //             clearInterval(timerId);
+
+        //             // 
+        //         }
+        //     }, 750);
+        //     //timerId;
+        //     // увеличиваем i на 1
+        //     // и выводим текст с номером i
+
+        // });
+    </script>
+</body>
+
+</html>

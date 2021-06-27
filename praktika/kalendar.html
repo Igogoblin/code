@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>календарь(9)</title>
+    <style>
+        table,
+        tr,
+        td {
+            border: solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p id="showMonth"></p><button id="minY">
+            <-><button id="maxY">-></button>
+                <button id="minM">
+                    <-< /button><button id="maxM">-></button>
+                        <table id="table"></table>
+    </div>
+
+    <script>
+        let table = document.querySelector('#table');
+        let showMonth = document.querySelector('#showMonth');
+        let minM = document.querySelector('#minM');
+        let maxM = document.querySelector('#maxM');
+        let minY = document.querySelector('#minY');
+        let maxY = document.querySelector('#maxY');
+        let months = [
+            'январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
+            'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'
+        ];
+        let days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+        let date = new Date();
+        let d = date.getDay();
+        let dateN = date.getDate();
+        let month = date.getMonth();
+        let year = date.getFullYear();
+
+        console.log(year + '/' + month + '/' + dateN + '//' + d);
+        showMonth.innerHTML = `Год ${year} ${months[month]}`;
+
+        function showKalendar() {
+            let wi = 1;
+            let countDay = -5;
+
+            console.log(year + ' ' + month + ' ');
+            function getUorMonth(year, month) {
+                let da = new Date(year, month, 1);
+                return countDay = countDay - da.getDay();
+            }
+            console.log("countDay " + getUorMonth(year, month));
+
+            for (let i = 0; i <= 5; i++) {
+                let tr = document.createElement('tr');
+                for (let j = 0; j < 7; j++) {
+                    let td = document.createElement('td');
+                    if (i == 0) {
+                        td.innerHTML = days[j];
+                    } else if (countDay > 0 && countDay <= getDayInMonth(month)) {//getUorMonth
+                        td.innerHTML = countDay;
+                    } else if (countDay <= 0 || countDay > getDayInMonth(month)) {
+                        td.innerHTML = '';
+                    }
+                    if (wi % 7 == 0) {
+                        td.style.backgroundColor = "yellow";
+                    }
+                    if (td.innerHTML == getUorDate() && month == getYouMonth() && year == getUourYear()) {
+                        td.style.backgroundColor = "green";
+                    }
+
+                    countDay++;
+                    wi++;
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+        }
+        showKalendar();
+
+        function getDayInMonth(month) {
+            switch (month + 1) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    return 31;
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    return 30;
+                    break;
+                case 2:
+                    return 28;
+                    break;
+                default:
+                    console.log("плохо получили месяц");
+            }
+        }
+
+        minY.addEventListener('click', function () {
+            table.innerHTML = "";
+            year--;
+            showMonth.innerHTML = `Год ${year} ${months[month]}`;
+            showKalendar();
+        });
+
+        maxY.addEventListener('click', function () {
+            table.innerHTML = "";
+            year++;
+            showMonth.innerHTML = `Год ${year} ${months[month]}`;
+            showKalendar();
+        });
+
+        minM.addEventListener('click', function () {
+            table.innerHTML = "";
+            month--;
+            if (month < 0) {
+                year--;
+                month = 11;
+            }
+            showMonth.innerHTML = `Год ${year} ${months[month]}`;
+            showKalendar();
+        });
+
+        maxM.addEventListener('click', function () {
+            table.innerHTML = "";
+            month++;
+            if (month > 11) {
+                year++;
+                month = 0;
+            }
+            showMonth.innerHTML = `Год ${year} ${months[month]}`;
+            showKalendar();
+        });
+
+        function getUorDate() {
+            return date.getDate();
+        }
+        function getUourYear() {
+            return date.getFullYear();
+        }
+        function getYouMonth() {
+            return date.getMonth();
+        }
+
+        function getFirstDay(year, month) {
+            return console.log(date.getDay());
+        }
+    </script>
+</body>
+
+</html>
