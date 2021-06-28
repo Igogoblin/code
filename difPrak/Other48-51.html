@@ -54,6 +54,7 @@ let days;
 let hours;
 let minuts;
 let seconds;
+ let now = new Date();
 push.addEventListener("click", function(){
    let daySweet;
    daySweet = inp.value;
@@ -61,6 +62,11 @@ console.log(daySweet);
    let res = daySweet.split(/[.,\s\-:]/); 
    console.log(res);
    console.log(typeof res[2]);
+   document.cookie.dayB = +res[0];
+   document.cookie.monthB = +res[1];
+   console.log(document.cookie);
+   let birstday = new Date(now.getFullYear(),document.cookie.monthB,document.cookie.dayB);
+   console.log(birstday);
     //document.cookie = `'city=${inp.value}'`;
 // console.log(document.cookie);
 // console.log(document.cookie.city);
@@ -78,11 +84,33 @@ parent.append (p);
 
 //function decompozition time
 function decompozitionTime(){
-    let now = new Date();
+   
 
 }
+//console.log(getCookie(name));
+console.log(document.cookie);
+console.log(getCookie(age));
+let f1 =22;
+let f2 =7;
+console.log(f1%f2);
+console.log(Math.floor(f1/f2));
 
+function getCookie(name) {
+	var matches = document.cookie.match(new RegExp(
+		'(?:^|\s)' + name.replace(/([.$?*+\\\/{}|()\[\]^])/g, '\\$1') + '=(.*?)(?:;|$)'
+	));
+	return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
 
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
     </script>
 
 </body>
