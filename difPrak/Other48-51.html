@@ -61,10 +61,10 @@ push.addEventListener("click", function(){
 console.log(daySweet);
    let res = daySweet.split(/[.,\s\-:]/); 
    console.log(res);
-   console.log(typeof res[2]);
-   document.cookie.dayB = +res[0];
-   document.cookie.monthB = +res[1];
-   console.log(document.cookie);
+   console.log(typeof +res[2]);
+   document.cookie = `dayB=${res[0]}`;
+   document.cookie =`monthB=${res[1]}`;
+   console.log(getCookie('dayB'));
    let birstday = new Date(now.getFullYear(),document.cookie.monthB,document.cookie.dayB);
    console.log(birstday);
     //document.cookie = `'city=${inp.value}'`;
@@ -87,13 +87,19 @@ function decompozitionTime(){
    
 
 }
-//console.log(getCookie(name));
+
 console.log(document.cookie);
-console.log(getCookie(age));
+console.log(getCookie('name'));
+console.log(getCookie('age'));
 let f1 =22;
 let f2 =7;
 console.log(f1%f2);
 console.log(Math.floor(f1/f2));
+
+
+let res = document.cookie.match(/е=([a-z])+|([0-9])+/g);
+console.log(res);
+
 
 function getCookie(name) {
 	var matches = document.cookie.match(new RegExp(
